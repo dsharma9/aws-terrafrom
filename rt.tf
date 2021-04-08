@@ -15,6 +15,18 @@ resource "aws_route_table" "master-rt" {
     Name = "Master-RT"
   }
 }
+resource "aws_route_table_association" "master-subnet-rt-association" {
+  provider = aws.region-master
+  subnet_id      = aws_subnet.m-sub-1.id
+  route_table_id = aws_route_table.master-rt.id
+}
+
+resource "aws_route_table_association" "master-subnet-rt-association-2" {
+  provider = aws.region-master
+  subnet_id      = aws_subnet.m-sub-2.id
+  route_table_id = aws_route_table.master-rt.id
+}
+
 
 # RT for worker
 resource "aws_route_table" "worker-rt" {
@@ -33,6 +45,12 @@ resource "aws_route_table" "worker-rt" {
     Name = "Worker-RT"
   }
 }
+resource "aws_route_table_association" "worker-subnet-rt-association" {
+  provider = aws.region-worker
+  subnet_id      = aws_subnet.w-sub-1.id
+  route_table_id = aws_route_table.worker-rt.id
+}
+
 
 
 # merging main RT of Master
