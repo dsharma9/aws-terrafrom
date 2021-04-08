@@ -16,13 +16,13 @@ resource "aws_route_table" "master-rt" {
   }
 }
 resource "aws_route_table_association" "master-subnet-rt-association" {
-  provider = aws.region-master
+  provider       = aws.region-master
   subnet_id      = aws_subnet.m-sub-1.id
   route_table_id = aws_route_table.master-rt.id
 }
 
 resource "aws_route_table_association" "master-subnet-rt-association-2" {
-  provider = aws.region-master
+  provider       = aws.region-master
   subnet_id      = aws_subnet.m-sub-2.id
   route_table_id = aws_route_table.master-rt.id
 }
@@ -46,7 +46,7 @@ resource "aws_route_table" "worker-rt" {
   }
 }
 resource "aws_route_table_association" "worker-subnet-rt-association" {
-  provider = aws.region-worker
+  provider       = aws.region-worker
   subnet_id      = aws_subnet.w-sub-1.id
   route_table_id = aws_route_table.worker-rt.id
 }
