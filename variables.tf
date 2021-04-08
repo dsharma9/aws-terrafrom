@@ -6,3 +6,7 @@ variable "worker" {
   type    = string
   default = "us-west-2"
 }
+variable "peer_owner_id" {
+  type    = string
+  default = "316615696866"
+}
