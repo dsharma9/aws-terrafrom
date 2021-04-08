@@ -10,3 +10,8 @@ variable "peer_owner_id" {
   type    = string
   default = "967756262698"
 }
+
+variable "worker-count" {
+  type    = number
+  default = 1
+}
