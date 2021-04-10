@@ -1,0 +1,10 @@
+---
+- name: this playbook is for Jenkins master
+  hosts: master 
+  become: yes
+
+  tasks: 
+    - name: installing git package
+      yum: 
+         name: git 
+         state: latest  

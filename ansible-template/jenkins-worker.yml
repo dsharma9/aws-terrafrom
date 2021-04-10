@@ -1,0 +1,10 @@
+---
+- name: this playbook is for Jenkins master
+  hosts: worker 
+  become: yes
+
+  tasks: 
+    - name: installing jq json parser 
+      yum: 
+         name: jq
+         state: latest  
