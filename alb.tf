@@ -4,7 +4,7 @@ resource "aws_lb" "alb" {
   internal           = false
   load_balancer_type = "application"
   security_groups    = [aws_security_group.alb.id]
-  subnets            = [aws_subnet.m-sub-1.id, aws_subnet.m-sub-1.id]
+  subnets            = [aws_subnet.m-sub-1.id, aws_subnet.m-sub-2.id]
 
   tags = {
     Environment = "production"
@@ -24,7 +24,7 @@ resource "aws_lb_target_group" "alb-tg" {
 
   health_check {
     enabled           = true
-    healthy_threshold = 3
+    timeout           = 3
     interval          = 5
     matcher           = "200-299"
     path              = "/"
