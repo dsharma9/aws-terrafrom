@@ -1,7 +1,7 @@
-# SG for ELB
-resource "aws_security_group" "allow_outside-traffic" {
+# SG for ALB
+resource "aws_security_group" "alb" {
   provider    = aws.region-master
-  name        = "outside"
+  name        = "ALB"
   description = "Allow TLS and http inbound traffic"
   vpc_id      = aws_vpc.master.id
 
@@ -29,7 +29,7 @@ resource "aws_security_group" "allow_outside-traffic" {
   }
 
   tags = {
-    Name = "allow-traffice-elb"
+    Name = "allow-traffice-alb"
   }
 }
 
@@ -44,10 +44,10 @@ resource "aws_security_group" "sg-jenkins-master" {
 
   ingress {
     description     = "Allow inbound traffic from ELB on 8080"
-    from_port       = 8080
-    to_port         = 8080
+    from_port       = var.alb_port
+    to_port         = var.alb_port
     protocol        = "tcp"
-    security_groups = [aws_security_group.allow_outside-traffic.id]
+    security_groups = [aws_security_group.alb.id]
   }
 
   ingress {

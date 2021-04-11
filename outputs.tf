@@ -19,3 +19,7 @@ output "Jenkins-Worker-private_ip" {
     instance.id => instance.private_ip
   }
 }
+
+output "DNS-name-ALB" {
+  value = aws_lb.alb.dns_name
+}

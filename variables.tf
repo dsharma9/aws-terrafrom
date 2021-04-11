@@ -8,7 +8,7 @@ variable "worker" {
 }
 variable "peer_owner_id" {
   type    = string
-  default = "771680087539"
+  default = "243657276572"
 }
 
 variable "worker-count" {
@@ -37,3 +37,7 @@ variable "private_key" {
   default = "~/.ssh/id_rsa"
 }
 
+variable "alb_port" {
+  type    = number
+  default = 80
+}

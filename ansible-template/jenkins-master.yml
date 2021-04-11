@@ -8,3 +8,14 @@
       yum: 
          name: git 
          state: latest  
+
+    - name: Installing web-service on master 
+      yum: 
+        name: httpd
+        state: latest
+    
+    - name: enabling and restarting httpd
+      service: 
+         name: httpd
+         state: restarted
+         enabled: yes
