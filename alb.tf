@@ -23,13 +23,13 @@ resource "aws_lb_target_group" "alb-tg" {
   load_balancing_algorithm_type = "round_robin"
 
   health_check {
-    enabled           = true
-    timeout           = 3
-    interval          = 5
-    matcher           = "200-299"
-    path              = "/"
-    port              = var.alb_port
-    protocol          = "HTTP"
+    enabled  = true
+    timeout  = 3
+    interval = 5
+    matcher  = "200-299"
+    path     = "/"
+    port     = var.alb_port
+    protocol = "HTTP"
   }
   tags = {
     Name = "jenkins-tg"
@@ -45,10 +45,31 @@ resource "aws_lb_listener" "jenkins-listner-http" {
   protocol          = "HTTP"
 
   default_action {
+    type = "redirect"
+    redirect {
+      port        = "443"
+      protocol    = "HTTPS"
+      status_code = "HTTP_301"
+    }
+  }
+}
+
+# Listner at 443 for ALB
+resource "aws_lb_listener" "jenkins-listner-443" {
+  provider          = aws.region-master
+  load_balancer_arn = aws_lb.alb.arn
+  port              = "443"
+  protocol          = "HTTPS"
+  ssl_policy        = "ELBSecurityPolicy-2016-08"
+  certificate_arn   = aws_acm_certificate.jenkins-lb-https-cert.arn
+
+  default_action {
     type             = "forward"
     target_group_arn = aws_lb_target_group.alb-tg.arn
   }
 }
+
+
 
 # Attaching TG to instance
 resource "aws_lb_target_group_attachment" "attach-tg-jenkins-master" {

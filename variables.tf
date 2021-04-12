@@ -8,7 +8,7 @@ variable "worker" {
 }
 variable "peer_owner_id" {
   type    = string
-  default = "404519219403"
+  default = "690834645538"
 }
 
 variable "worker-count" {
@@ -40,4 +40,8 @@ variable "private_key" {
 variable "alb_port" {
   type    = number
   default = 80
+}
+variable "dns-name" {
+  type    = string
+  default = "cmcloudlab1611.info."
 }
